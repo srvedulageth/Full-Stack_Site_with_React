@@ -1,0 +1,112 @@
+    1  pwd
+    2  which mongod
+    3  sudo apt-get install gnupg curl
+    4  curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc |    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg    --dearmor
+    5  vi /etc/apt/sources.list.d
+    6  cd /etc/apt/sources.list.d/
+    7  ls
+    8  touch mongodb-org-8.0.list
+    9  sudo touch mongodb-org-8.0.list
+   10  ls -al
+   11  cd
+   12  ls
+   13  echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+   14  less /etc/apt/sources.list.d/mongodb-org-8.0.list 
+   15  vi /etc/apt/sources.list.d/mongodb-org-8.0.list 
+   16  sudo apt-get update
+   17  sudo apt-get install -y mongodb-org
+   18  sudo service mongod start
+   19  sudo service mongod status
+   20  clear
+   21  sudo service mongod status
+   22  mongosh
+   23  clear
+   24  sudo apt update
+   25  sudo apt install nginx
+   26  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   27  source ~/.bashrc
+   28  nvm install --lts
+   29  node -e "console.log('Running Node.js ' + process.version)"
+   30  sudo npm install pm2@latest -g
+   31  which npm
+   32  sudo /home/ubuntu/.nvm/versions/node/v22.13.1/bin/npm install pm2@latest -g
+   33  node -v
+   34  npm install pm2@latest -g
+   35  pwd
+   36  ls -al
+   37  mkdir apps
+   38  cd apps/
+   39  which git
+   40  git clone https://github.com/srvedulageth/Full-Stack_Site_with_React.git
+   41  ls -al
+   42  cd Full-Stack_Site_with_React/front-end/
+   43  ls -al
+   44  npm install
+   45  ls -al
+   46  vi package.json 
+   47  npm run build
+   48  ls -al
+   49  pwd
+   50  cp -r dist ../back-end/
+   51  cd ba
+   52  cd ../back-end/
+   53  ls -al
+   54  vi credentials.json
+   55  ls -al
+   56  grep cred *
+   57  grep cred * -r
+   58  clear
+   59  ls
+   60  npm install
+   61  ls -al
+   62  clear
+   63  pwd
+   64  pm2 start src/server.js --name my_app
+   65  pm2 logs 0
+   66  npm install express
+   67  pm2 logs 0
+   68  pm2 restart src/server.js --name my_app
+   69  pm2 logs 0
+   70  npm install mongodb
+   71  pm2 restart src/server.js --name my_app
+   72  npm install mongodb
+   73  pm2 restart src/server.js --name my_app
+   74  pm2 logs 0
+   75  sudo ufw status
+   76  ufw status
+   77  sudo ufw status
+   78  sudo ufw allow 27017
+   79  sudo ufw status
+   80  pm2 restart src/server.js --name my_app
+   81  pm2 logs 0
+   82  pm2 restart src/server.js --name my_app
+   83  pm2 logs 0
+   84  pm2 restart src/server.js --name my_app_1
+   85  pm2 logs 0
+   86  pwd
+   87  ls
+   88  cd apps/Full-Stack_Site_with_React/back-end/
+   89  pm2 restart src/server.js --name my_app_1
+   90  pm2 logs 0
+   91  vi /etc/nginx/sites-available/default 
+   92  sudo vi /etc/nginx/sites-available/default 
+   93  sudo nginx -t
+   94  sudo service nginx restart
+   95  sudo vi /etc/nginx/sites-available/default 
+   96  clear
+   97  ls
+   98  cd apps/
+   99  ls
+  100  cd Full-Stack_Site_with_React/
+  101  ls
+  102  cd back-end/
+  103  ls
+  104  pm2 log 0
+  105  history
+  106  pm2 restart src/server.js --name my_app
+  107  ls
+  108  pm2 restart src/server.js --name my_app
+  109  pm2 start src/server.js --name my_app
+  110  pm2 log 0
+  111  history
+  112  history > t1

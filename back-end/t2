@@ -1,0 +1,324 @@
+    1  pwd
+    2  which mongod
+    3  sudo apt-get install gnupg curl
+    4  curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc |    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg    --dearmor
+    5  vi /etc/apt/sources.list.d
+    6  cd /etc/apt/sources.list.d/
+    7  ls
+    8  touch mongodb-org-8.0.list
+    9  sudo touch mongodb-org-8.0.list
+   10  ls -al
+   11  cd
+   12  ls
+   13  echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+   14  less /etc/apt/sources.list.d/mongodb-org-8.0.list 
+   15  vi /etc/apt/sources.list.d/mongodb-org-8.0.list 
+   16  sudo apt-get update
+   17  sudo apt-get install -y mongodb-org
+   18  sudo service mongod start
+   19  sudo service mongod status
+   20  clear
+   21  sudo service mongod status
+   22  mongosh
+   23  clear
+   24  sudo apt update
+   25  sudo apt install nginx
+   26  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   27  source ~/.bashrc
+   28  nvm install --lts
+   29  node -e "console.log('Running Node.js ' + process.version)"
+   30  sudo npm install pm2@latest -g
+   31  which npm
+   32  sudo /home/ubuntu/.nvm/versions/node/v22.13.1/bin/npm install pm2@latest -g
+   33  node -v
+   34  npm install pm2@latest -g
+   35  pwd
+   36  ls -al
+   37  mkdir apps
+   38  cd apps/
+   39  which git
+   40  git clone https://github.com/srvedulageth/Full-Stack_Site_with_React.git
+   41  ls -al
+   42  cd Full-Stack_Site_with_React/front-end/
+   43  ls -al
+   44  npm install
+   45  ls -al
+   46  vi package.json 
+   47  npm run build
+   48  ls -al
+   49  pwd
+   50  cp -r dist ../back-end/
+   51  cd ba
+   52  cd ../back-end/
+   53  ls -al
+   54  vi credentials.json
+   55  ls -al
+   56  grep cred *
+   57  grep cred * -r
+   58  clear
+   59  ls
+   60  npm install
+   61  ls -al
+   62  clear
+   63  pwd
+   64  pm2 start src/server.js --name my_app
+   65  pm2 logs 0
+   66  npm install express
+   67  pm2 logs 0
+   68  pm2 restart src/server.js --name my_app
+   69  pm2 logs 0
+   70  npm install mongodb
+   71  pm2 restart src/server.js --name my_app
+   72  npm install mongodb
+   73  pm2 restart src/server.js --name my_app
+   74  pm2 logs 0
+   75  sudo ufw status
+   76  ufw status
+   77  sudo ufw status
+   78  sudo ufw allow 27017
+   79  sudo ufw status
+   80  pm2 restart src/server.js --name my_app
+   81  pm2 logs 0
+   82  pm2 restart src/server.js --name my_app
+   83  pm2 logs 0
+   84  pm2 restart src/server.js --name my_app_1
+   85  pm2 logs 0
+   86  pwd
+   87  ls
+   88  cd apps/Full-Stack_Site_with_React/back-end/
+   89  pm2 restart src/server.js --name my_app_1
+   90  pm2 logs 0
+   91  vi /etc/nginx/sites-available/default 
+   92  sudo vi /etc/nginx/sites-available/default 
+   93  sudo nginx -t
+   94  sudo service nginx restart
+   95  sudo vi /etc/nginx/sites-available/default 
+   96  clear
+   97  ls
+   98  cd apps/
+   99  ls
+  100  cd Full-Stack_Site_with_React/
+  101  ls
+  102  cd back-end/
+  103  ls
+  104  pm2 log 0
+  105  history
+  106  pm2 restart src/server.js --name my_app
+  107  ls
+  108  pm2 restart src/server.js --name my_app
+  109  pm2 start src/server.js --name my_app
+  110  pm2 log 0
+  111  history
+  112  history > t1
+  113  vi t1
+  114  sudo ufw allow 27017
+  115  pm2 restart src/server.js --name my_app
+  116  pm2 log 0
+  117  ps -aef | grep mongo
+  118  vi t1
+  119  sudo service mongod start
+  120  sudo service mongod status
+  121  pm2 restart src/server.js --name my_app
+  122  pm2 log 0
+  123  clear
+  124  ls
+  125  mkdir apps_dynamoDB
+  126  cd apps_dynamoDB/
+  127  ls
+  128  git clone https://github.com/srvedulageth/Full-Stack_Site_with_React.git
+  129  ls
+  130  ls -al
+  131  cd Full-Stack_Site_with_React/
+  132  ls -al
+  133  cd front-end/
+  134  ls -al
+  135  npm install
+  136  npm run build
+  137  mv dist ../back-end/
+  138  cd ../back-end/
+  139  ls -al
+  140  npm install
+  141  ls -al
+  142  cp ../../../apps/Full-Stack_Site_with_React/back-end/credentials.json .
+  143  ls -al
+  144  cd src/
+  145  ls -al
+  146  clear
+  147  vi server.js 
+  148  ls
+  149  cp server.js server.js_org 
+  150  ls
+  151  ls -al
+  152  ls
+  153  vu server.js
+  154  vi server.js
+  155  ls -al
+  156  vi server.js
+  157  vi server.js_org 
+  158  vi server.js
+  159  clear
+  160  cd apps_dynamoDB/
+  161  ls
+  162  cd Full-Stack_Site_with_React/
+  163  ls -al
+  164  cd back-end/src/
+  165  vi server.js
+  166  npm install @aws-sdk/client-dynamodb
+  167  ls -0al
+  168  ls -al
+  169  vi server.js
+  170  cd apps_dynamoDB/
+  171  ls
+  172  cd Full-Stack_Site_with_React/
+  173  ls
+  174  cd back-end/
+  175  ls -al
+  176  cd src/
+  177  vi server.js
+  178  clear
+  179  ls -al
+  180  vi server.js
+  181  pwd
+  182  ls -al
+  183  git status
+  184  pwd
+  185  cd ..
+  186  vi .env 
+  187  cat .env 
+  188  vi .env 
+  189  clear
+  190  ls
+  191  cd apps_dynamoDB/
+  192  ls
+  193  cd Full-Stack_Site_with_React/
+  194  ls
+  195  cd back-end/
+  196  ls -al
+  197  vi .env 
+  198  cd src/
+  199  ls
+  200  vi server.js
+  201  ls -al
+  202  clear
+  203  ls
+  204  vi server.js
+  205  clear
+  206  ls
+  207  cd apps_dynamoDB/
+  208  ls
+  209  cd Full-Stack_Site_with_React/
+  210  ls
+  211  cd back-end/
+  212  ls -al
+  213  vi app.yaml 
+  214  vi prod-env.yaml 
+  215  ls -al
+  216  vi app.yaml 
+  217  ls -al
+  218  vi prod-env.yaml 
+  219  cd src/
+  220  ls -al
+  221  vi server.js_org 
+  222  cd ..
+  223  ls
+  224  grep prod *
+  225  grep app *
+  226  ls -al
+  227  vi package.json 
+  228  l
+  229  ls
+  230  cd src/
+  231  ls -al
+  232  vi server.js
+  233  cd apps_dynamoDB/
+  234  ls
+  235  cd 
+  236  cd -
+  237  cd Full-Stack_Site_with_React/
+  238  cd back-end/src/
+  239  ls -al
+  240  vi server.js
+  241  ls -al
+  242  vi server.js
+  243  clear
+  244  pwd
+  245  cd apps
+  246  ls -alo
+  247  ls -al
+  248  ps -aef | grep nginx
+  249  pwd
+  250  ls -al
+  251  cd Full-Stack_Site_with_React/back-end/
+  252  ls -al
+  253  cp .env .env_mdb
+  254  sudo service nginx stop
+  255  sudo service nginx restart
+  256  sudo service nginx stop
+  257  ls
+  258  ls -al
+  259  vi .env
+  260  cp ../../../apps_dynamoDB/Full-Stack_Site_with_React/back-end/.env .
+  261  ls -al
+  262  vi .env
+  263  cd src/
+  264  ls -al
+  265  cp server.js server.js_mdb
+  266  vi server.js
+  267  cd ..
+  268  npm run dev
+  269  vi src/server.js
+  270  npm run dev
+  271  pwd
+  272  cd apps_dynamoDB/Full-Stack_Site_with_React/back-end/
+  273  ls -al
+  274  cd src/
+  275  ls -al
+  276  vi server.js
+  277  clear
+  278  pwd
+  279  ls -al
+  280  vi server.js
+  281  pwd
+  282  ls
+  283  cd ..
+  284  ls -al
+  285  vi .env 
+  286  pwd
+  287  ls
+  288  cd apps
+  289  ls
+  290  cd Full-Stack_Site_with_React/
+  291  ls -al
+  292  cd back-end/
+  293  ls
+  294  cd src/
+  295  ls
+  296  vi server.js
+  297  cd ..
+  298  npm run dev
+  299  vi server.js
+  300  vi src/server.js
+  301  clear
+  302  npm run dev
+  303  vi src/server.js
+  304  history 
+  305  npm install @aws-sdk/client-dynamodb
+  306  npm run dev
+  307  vi src/server.js
+  308  npm run dev
+  309  vi src/server.js
+  310  ls
+  311  vi src/server.js
+  312  sudo lsof -i :8000
+  313  kill -9 1748
+  314  sudo lsof -i :8000
+  315  kill -9 10789
+  316  sudo lsof -i :8000
+  317  mpm run dev
+  318  npm run dev
+  319  vi t1 
+  320  pm2 stop src/server.js
+  321  sudo lsof -i :8000
+  322  npm run dev
+  323  history
+  324  history > t2

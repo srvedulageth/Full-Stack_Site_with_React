@@ -11,7 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
-
+.env
+.env_mdb
 credentials.json
 
 # Editor directories and files

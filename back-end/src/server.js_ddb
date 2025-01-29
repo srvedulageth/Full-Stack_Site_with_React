@@ -65,7 +65,7 @@ async function updateAttribute(tableName, key, attributeName, attributeValue) {
 app.use(express.static(path.join(__dirname, '../dist')));
 
 //Any endpoint that doesn't start with '/apimd' send that to a static file using regular expression
-app.get(/^(?!\/apimd).+/, (req, res) => {
+app.get(/^(?!\/api).+/, (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
   });
   
@@ -82,17 +82,6 @@ app.get('/apimd/articles/:name', async (req, res) => {
     } catch (err) {
     	console.error(err);
     }
-
-	//Key: { name: name }
-    const getItemCommand = new GetItemCommand({
-	TableName: "full-stack-react-db",
-        Key: { "name": {"S": name, } }
-    });
-    console.log(getItemCommand);
-
-    const article = await dynamoDBclient.send(getItemCommand);
-    console.log(article);
-    res.json(article);
 });
 
 //Middleware
