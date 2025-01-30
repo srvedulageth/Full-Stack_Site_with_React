@@ -3,7 +3,7 @@ import {useParams, useLoaderData} from 'react-router-dom';
 import artciles from '../article-content';
 import CommentsList from '../CommentsList';
 import axios from 'axios';
-import AddCommentForm from '../AddCommenForm';
+import AddCommentForm from '../AddCommentForm';
 import useUser from '../useUser';
 
 export default function ArticlePage() {
@@ -48,16 +48,21 @@ export default function ArticlePage() {
         {user && <button onClick={onUpvoteclicked}>Upvote</button>}
         <p>This article has {upVotes} upvotes!</p>
         {article.content.map(p => <p key={p}> {p} </p>)}
+
+	    {/*
         {user ? <AddCommentForm onAddComment={onAddComment} />
         : <p>Log in to add a comment</p>}
         <CommentsList comments={comment} />
+	*/}
+
         </>
     );
 }
 
 export async function loader ({params}) {
+    console.log(params.name);
     const res = await axios.get('/apimd/articles/' + params.name);
-    console.log(res.data.upVotes);
+    console.log(res);
     const {upVotes, comment} = res.data;
     return {upVotes, comment};
 }

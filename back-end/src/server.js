@@ -2,7 +2,7 @@ import express from 'express';
 import admin from 'firebase-admin';
 import fs from 'fs';
 import path from 'path';
-import { DynamoDBClient, ListTablesCommand, PutItemCommand, GetItemCommand, ScanCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, UpdateItemCommand, ListTablesCommand, PutItemCommand, GetItemCommand, ScanCommand } from '@aws-sdk/client-dynamodb';
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
 
 import { fileURLToPath } from 'url';
@@ -51,9 +51,11 @@ async function updateAttribute(tableName, key, attributeName, attributeValue) {
     },
     ReturnValues: 'UPDATED_NEW'
   };
-
+  
+  console.log(params);
+  const command = new UpdateItemCommand(params);
   try {
-    const result = await dynamoDBclient.update(params).promise();
+    const result = await dynamoDBclient.send(command);
     return result.Attributes;
   } catch (error) {
     console.error('Error updating item:', error);
@@ -91,8 +93,11 @@ app.get('/apimd/articles/:name', async (req, res) => {
     console.log(getItemCommand);
 
     const article = await dynamoDBclient.send(getItemCommand);
-    console.log(article);
-    res.json(article);
+    const item = unmarshall(article.Item);
+    console.log(item);
+
+    //res.json(article);
+    res.json(item);
 });
 
 //Middleware
@@ -117,28 +122,39 @@ app.post('/apimd/articles/:name/upvotes', async (req, res) => {
     //const article = await db.collection('articles').findOne({name});
     const getItemCommand = new GetItemCommand({
         TableName: "full-stack-react-db",
-        Key: { "name": { "S": {name} } }
+        Key: { "name": { "S": name, } }
     });
     const article = await dynamoDBclient.send(getItemCommand);
+    const item = unmarshall(article.Item);
     
-    const upvoteIds = article.upvoteIds || [];
+    const upvoteIds = item.upvoteIds;
     const canUpvote = uid && !upvoteIds.includes(uid);
-    console.log(article.upVotes);
+    console.log(item.upVotes);
 
-    if(canUpdate) {
+    if(canUpvote) {
+	//Update upVotes
 	const tableName = 'full-stack-react-db';
-	const key = { "name": { "S": {name} } };
+	const key = { "name": { "S": name, } };
 	const attributeName = 'upVotes';
-	const attributeValue = article.upVotes+1;
-        push.upvoteIds(uid);
+	const attributeValue = item.upVotes+1;
 
         updateAttribute(tableName, key, attributeName, attributeValue)
         .then(result => console.log('Attribute updated:', result))
         .catch(error => console.error('Error:', error));
 
+	//Update upvoteIds
+        push.upvoteIds(uid);
+        console.log(upvoteIds);
+	const attributeName1 = 'upvoteIds';
+	const attributeValue1 = upvoteIds;
+
+        updateAttribute(tableName, key, attributeName1, attributeValue1)
+        .then(result => console.log('Attribute updated:', result))
+        .catch(error => console.error('Error:', error));
+	 
     	const getItemCommand = new GetItemCommand({
 	    TableName: "full-stack-react-db",
-	    Key: { "name": { "S": {name} } }
+	    Key: { "name": { "S": name, } }
     	});
     	const article = await dynamoDBclient.send(getItemCommand);
         res.json(article);
