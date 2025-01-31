@@ -1,0 +1,27 @@
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { UpdateCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+
+// Create DynamoDB client
+const client = new DynamoDBClient({ region: "us-east-1" });
+const docClient = DynamoDBDocumentClient.from(client);
+
+const params = {
+  TableName: "YourTableName",
+  Key: { "PrimaryKey": "YourKeyValue" }, // Replace with your actual primary key
+  UpdateExpression: "SET #attrName = :attrValue",
+  ExpressionAttributeNames: { "#attrName": "yourAttributeName" },
+  ExpressionAttributeValues: { ":attrValue": "NewValue" },
+  ReturnValues: "UPDATED_NEW"
+};
+
+async function updateItem() {
+  try {
+    const data = await docClient.send(new UpdateCommand(params));
+    console.log("Update succeeded:", JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error("Error updating item:", err);
+  }
+}
+
+updateItem();
+

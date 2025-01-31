@@ -152,7 +152,7 @@ app.post('/apimd/articles/:name/upvotes', async (req, res) => {
         console.log('lala 2222'); console.log(item1);
 
         //res.json(article);
-        res.json(item1);
+        res.json(item);
     }
     else {
       res.sendStatus(403);

@@ -110,8 +110,8 @@ app.post('/apimd/articles/:name/upvotes', async (req, res) => {
         TableName: "full-stack-react-db",
         Key: { "name": { "S": name, } }
     });
-    let article = await dynamoDBclient.send(getItemCommand);
-    let item = unmarshall(article.Item);
+    const article = await dynamoDBclient.send(getItemCommand);
+    const item = unmarshall(article.Item);
     
     let upvoteIds = [];
     upvoteIds = item.upvoteIds;
@@ -119,40 +119,48 @@ app.post('/apimd/articles/:name/upvotes', async (req, res) => {
     console.log(item.upVotes);
 
     if(canUpvote) {
+	//Update upVotes
 	const tableName = 'full-stack-react-db';
-	const key = { name };
+	const key = { "name": { "S": name, } };
 	let attributeName1 = 'upVotes';
-	let attributeValue1 = item.upVotes+1;
+	let attributeValue1 = item.upVotes+2;
 	let attributeName2 = 'upvoteIds';
 	let attributeValue2 = upvoteIds;
-        upvoteIds.push(uid);
 
+	    {/*
 	let params = {
-            TableName: tableName,
-            Key: key,
-	    UpdateExpression: "SET #upVote = :counter, #upVoteIds = :uidarray",
-	    ExpressionAttributeNames:{
+            TableName: "full-stack-react-db",
+            Key: {name},
+	    UpdateExpression: {
+	       "SET #upVote = :counter, #upVoteIds = :uidarray",
+	    },
+	    ExpressionAttributeNames: {
                "#upVote": attributeName1, "#upVoteIds": attributeName2
             },
-            ExpressionAttributeValues:{
+            ExpressionAttributeValues: {
                ":counter": attributeValue1, ":uidarray": attributeValue2
+            },
+	    ReturnValues: "ALL_NEW"
+	};
+	*/}
+
+	const params = {
+            TableName: "full-stack-react-db",
+            Key: {name},
+	    UpdateExpression: {
+	       "SET #upVote = :counter",
+	    },
+	    ExpressionAttributeNames: {
+               "#upVote": attributeName1
+            },
+            ExpressionAttributeValues: {
+               ":counter": attributeValue1
             },
 	    ReturnValues: "ALL_NEW"
 	};
 	console.log(params);
 	let response = updateItem(params);
 	console.log(response);
-
-    	const getItemCommand = new GetItemCommand({
-	    TableName: "full-stack-react-db",
-	    Key: { "name": { "S": name, } }
-    	});
-    	let article = await dynamoDBclient.send(getItemCommand);
-        let item1 = unmarshall(article.Item);
-        console.log('lala 2222'); console.log(item1);
-
-        //res.json(article);
-        res.json(item1);
     }
     else {
       res.sendStatus(403);
