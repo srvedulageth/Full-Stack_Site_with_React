@@ -159,22 +159,6 @@ app.post('/apimd/articles/:name/upvotes', async (req, res) => {
     }
 });
 
-/*
-app.post('/apimd/articles/:name/comment', async (req, res) => {
-    const name = req.params.name;
-    const {postedBy, comment} = req.body;
-    const newComment = {postedBy, comment};
-
-    const updatedArticle = await db.collection('articles'). findOneAndUpdate({name}, {
-        $push: {comment: newComment}
-    },
-        {returnDocument: "after",
-    });
-
-    res.json(updatedArticle);
-});
-*/
-
 app.post('/apimd/articles/:name/comment', async (req, res) => {
     const name = req.params.name;
     const {postedBy, comment} = req.body;

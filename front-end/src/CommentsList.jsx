@@ -7,7 +7,7 @@ export default function CommentsList({comments}) {
                 comment => (
                     <div key={comment.text}>
                         <h4>{comment.postedBy}</h4>
-                        <p>{comment.text}</p>
+                        <p>{comment.comment}</p>
                     </div>
                 )
             )

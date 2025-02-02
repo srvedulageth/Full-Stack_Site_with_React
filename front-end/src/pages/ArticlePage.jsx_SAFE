@@ -20,47 +20,104 @@ export default function ArticlePage() {
     //const {name} = useParams();
 
     async function onUpvoteclicked() {
+	    console.log('A 444-1');
         const token = user && await user.getIdToken();
+	    console.log('A 444-2');
         const headers = token ? {authtoken : token} : {};
+	    console.log('A 444-3');
 
         {/*const res = await axios.post('/apimd/articles/' + name + '/upvotes');*/}
         const res = await axios.post('/apimd/articles/' + name + '/upvotes', null, {headers});
+	    console.log('A 444-4');
 
         const updatedArticleData = res.data;
+        console.log('ArticlePage 333'); console.log(updatedArticleData); console.log(upVotes);
         setupVotes(updatedArticleData.upVotes);
     }
 
     async function onAddComment({nameText, commentText}) {
+	    console.log('B 444-1');
         const token = user && await user.getIdToken();
+	    console.log('B 444-2');
         const headers = token ? {authtoken : token} : {};
+	    console.log('B 444-3');
 
         const res = await axios.post('/apimd/articles/' + name + '/comment', {
             postedBy: nameText,
             comment: commentText
         }, {headers});
+	    console.log('B 444-4'); console.log(res.data);
         const updatedArticleData = res.data;
+	    console.log('B 444-5'); console.log(updatedArticleData); console.log(updatedArticleData.comment);
+
+if (Array.isArray(updatedArticleData.comment)) {
+  console.log("myVariable is an array.");
+} else {
+  console.log("myVariable is not an array.");
+}
+
         setComment(updatedArticleData.comment);
+	    console.log('B 444-6');
     }
     
     return (
         <>
         <h1>This is {article.title} Page</h1>
 
+	    /*
         {user && <button onClick={onUpvoteclicked}>Upvote</button>}
         <p>This article has {upVotes} upvotes!</p>
+	*/
 
         {article.content.map(p => <p key={p}> {p} </p>)}
 
+	    /*
         {user ? <AddCommentForm onAddComment={onAddComment} />
         : <p>Log in to add a comment</p>}
+	    console.log({comment});
         <CommentsList comments={comment} />
+	*/
         </>
     );
 }
 
+/*
+const renderDynamoDBItems = (items) => {
+  return items.map(item => ({
+    postedBy: item.postedBy?.S, // Assuming 'postedBy' is a string attribute
+    comment: item.comment?.S, // Assuming 'comment' is a string attribute
+    age: item.age?.N ? Number(item.age.N) : null, // Assuming 'age' is a number attribute
+    isActive: item.isActive?.BOOL, // Assuming 'isActive' is a boolean attribute
+  }));
+};
+*/
+
+const renderDynamoDBItems = (items) => {
+    console.log('renderDynamoDBItems'); console.log(items);
+if (Array.isArray(items)) {
+  console.log("Variable items is an array.");
+} else {
+  console.log("Variable items is not an array.");
+}
+  return items.map(item => ({
+    postedBy: item.postedBy, // Assuming 'postedBy' is a string attribute
+    comment: item.comment, // Assuming 'comment' is a string attribute
+  }));
+};
+
 export async function loader ({params}) {
     console.log(params.name);
     const res = await axios.get('/apimd/articles/' + params.name);
+    console.log('ArticlePage 111'); console.log(res);
     const {upVotes, comment} = res.data;
-    return {upVotes, comment};
+    //const reformattedArray = kvArray.map(({ key, value }) => ({ [key]: value }));
+    //const allcomments = {res.data.map((item, index) => };
+    console.log('ArticlePage 222'); console.log(upVotes);
+
+    let comment1 = [];
+    comment1 = renderDynamoDBItems(res.data.comment1);
+    console.log('comment1'); console.log(comment1);
+    console.log('ArticlePage 333'); console.log(upVotes); console.log(comment1)
+
+    return {upVotes, comment1};
 }
